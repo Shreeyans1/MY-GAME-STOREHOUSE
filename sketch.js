@@ -1,10 +1,13 @@
 var helicopterIMG, helicopterSprite, packageSprite,packageIMG;
-var packageBody,ground
+var packageBody,ground;
+
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 const Render = Matter.Render;
+
+var box1, box2, box3;
 function preload()
 {
 	helicopterIMG=loadImage("helicopter.png")
@@ -27,11 +30,12 @@ function setup() {
 	groundSprite=createSprite(width/2, height-35, width,10);
 	groundSprite.shapeColor=color(255)
 
+    
 
 	engine = Engine.create();
 	world = engine.world;
 
-	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0.6, isStatic:true});
+	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0,isStatic:true});
 	World.add(world, packageBody);
 	
 
@@ -41,7 +45,9 @@ function setup() {
 
 
 	Engine.run(engine);
-  
+	box1 = new Box(400,650,200,20);
+	box2 = new Box(290,610,20,100);
+	box3 = new Box(510,610,20,100);
 }
 
 
@@ -50,8 +56,11 @@ function draw() {
   background(0);
   packageSprite.x= packageBody.position.x 
   packageSprite.y= packageBody.position.y 
+  box1.display();
+  box2.display();
+  box3.display();
   drawSprites();
- 
+  
 }
 
 function keyPressed() {
